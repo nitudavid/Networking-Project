@@ -1,0 +1,40 @@
+Tema realizata de Nitu David-Gabriel, 323CD
+
+Am inceput prin a lua rezolvarea laboratorului 10 de pe ocw. In plus am folosit 
+biblioteca parson pentru C data in cerinta temei(https://github.com/kgabis/parson
+), pentru ca sunt familiar cu ea.
+
+In primul rand am adaugat un token in antetul functiilor din requests, apoi am 
+facut inca o functie pentru delete, care este aproape la fel ca post.
+Restul codului este in client.c. 
+Functia createJson imi face string-ul Json pe care urmeaza sa il trimit la server, iar errorMessage imi "culege" eroarea si o parseaza.
+Mi-am facut variabile pentru a citi comanda, pentru a retine socket-ul, o variabila
+prin care dau acces user-ului la library, si ii iau accesul(spre exemplu la logout), cookies si data. 
+Apoi,prin while, deschid la inceput socket-ul si identific ce comanda primim de la tastatura urmand sa fac un caz pentru fiecare.
+exit{
+    Afisam un mesaj de deconectare de la server.
+}
+register{
+    Trimitem la server datele de input, inregistrand astfel un user nou. Verificam daca avem vre eroare, si daca nu avem afisam ca inregistrarea a fost un succes. In caz contrar afisam eroarea.
+}
+login{
+    Trimitem la server datele de input, verificam daca da eroare, iar daca nu da facem cookie-urile pentru sesiune.
+}
+enter_library{
+    Daca nu da eroare, ii garantam user-ului acces la librarie.
+}
+get_books{
+    Afisam raspunsul de la server, daca avem acces. Daca nu, dam mesaj de eroare.
+}
+get_book{
+    Daca nu avem acces afisam eroare. Daca avem, citim id-ul cartii pe care vrem sa o cautam. Trimitem path-ul catre server, iar apoi afisam raspunsul de la server, sau eroare.
+}
+add_book{
+    Am facut variabile alocate static pentru fiecare field al unei carti, un object in care pun ce citim, si un value. Citim cu fgets(pentru ca cu scanf nu mi-a iesit sa pastrez si spatiile) toate field-urile, si le punem in string. Apoi facem un serialized string in variabila book pentru a o trimite la server. Daca avem eroare o printam, iar daca nu catea este adaugata si afisam asta pe ecran.
+}
+delete_book{
+    Similar cu get_book, insa acum avem delete_request.
+}
+logout{
+    Trimitem la server intentia de a da logout. Daca nu da eroare, setam acces-ul la librarie 0, si printam ca dam logout.
+}
